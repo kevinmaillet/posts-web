@@ -1,19 +1,12 @@
 import React from "react";
 import Layout from './layout';
 import { useQuery } from 'react-query';
-import axios from 'axios';
+import { fetchPosts } from '../api/api';
 import Form from '../components/form'
 import Post from './post';
 
 
 const Posts = () => {
-
-
-    const fetchPosts = () => {
-        return axios.get('https://workers.kevinrmaillet314.workers.dev/posts').then((res) => res.data.data);
-    }
-
-
     const { isLoading, isError, data, error } = useQuery('posts', fetchPosts);
 
 

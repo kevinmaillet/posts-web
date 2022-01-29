@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import axios from 'axios';
+import { addPost } from '../api/api';
 
 const Form = () => {
     const [username, setUsername] = useState("");
@@ -10,9 +10,6 @@ const Form = () => {
 
     const queryClient = useQueryClient();
 
-    const addPost = (newPost) => {
-        return axios.post('https://workers.kevinrmaillet314.workers.dev/posts', newPost).then((res) => res.data.data);
-    }
 
 
     const mutation = useMutation(addPost, {
