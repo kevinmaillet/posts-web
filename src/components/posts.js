@@ -24,7 +24,7 @@ const Posts = () => {
             <Form />
             <div className="container flex-auto w-64 mx-3">
                 {data?.map(({ title, username, content }) => (
-                    <Post title={title} username={username} content={content} />
+                    <Post title={title} username={username} content={content} key={title} />
                 ))}
             </div>
         </Layout>

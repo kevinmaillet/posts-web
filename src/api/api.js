@@ -1,10 +1,16 @@
 import axios from 'axios';
 
+const worker = axios.create({
+    withCredentials: true,
+    baseURL: 'https://workers.kevinrmaillet314.workers.dev',
+
+});
+
 
 export const addPost = (newPost) => {
-    return axios.post('https://workers.kevinrmaillet314.workers.dev/posts', newPost).then((res) => res.data.data);
+    return worker.post('/posts', newPost).then((res) => res.data.data);
 }
 
 export const fetchPosts = () => {
-    return axios.get('https://workers.kevinrmaillet314.workers.dev/posts').then((res) => res.data.data);
+    return worker.get('/posts').then((res) => res.data.data);
 }

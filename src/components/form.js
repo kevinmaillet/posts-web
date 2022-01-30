@@ -10,8 +10,6 @@ const Form = () => {
 
     const queryClient = useQueryClient();
 
-
-
     const mutation = useMutation(addPost, {
         onSuccess: (newPost) => {
 
@@ -20,6 +18,11 @@ const Form = () => {
             setTitle("");
             setContent("");
         },
+
+        onError: (err) => {
+            console.log(err);
+            console.log(err.message);
+        }
 
     })
 
