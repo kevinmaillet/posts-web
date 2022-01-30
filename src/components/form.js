@@ -7,11 +7,17 @@ const Form = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [isBlank, setIsBlank] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const queryClient = useQueryClient();
 
     const mutation = useMutation(addPost, {
         onSuccess: (newPost) => {
+
+            if (newPost.status > 399 && newPost.status < 500) {
+                // console.log(newPost.data.errors)
+                throw new Error(newPost.data.errors)
+            }
 
             queryClient.setQueryData('posts', (old) => [...old, newPost]);
             setUsername("");
@@ -20,8 +26,8 @@ const Form = () => {
         },
 
         onError: (err) => {
-            console.log(err);
-            console.log(err.message);
+            setErrorMessage(err.message)
+
         }
 
     })
@@ -61,7 +67,7 @@ const Form = () => {
                 </label>
                 <input type="submit" className='cursor-pointer border-2 border-slate-500 w-full mt-3 p-1 rounded' />
                 {mutation.isLoading && <span>Loading...</span>}
-                {mutation.isError && <span onClick={() => mutation.reset()} className='cursor-pointer text-red-500'>You've already posted with this title. Please change your title.</span>}
+                {mutation.isError && <span onClick={() => mutation.reset()} className='cursor-pointer text-red-500'>{errorMessage}</span>}
                 {mutation.isSuccess && <span className='text-green-500 cursor-pointer' onClick={() => mutation.reset()}>Post Added!</span>}
                 {isBlank && <span className='text-red-500'>Your input is missing information!</span>}
             </form>
