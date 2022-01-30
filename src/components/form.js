@@ -15,7 +15,6 @@ const Form = () => {
         onSuccess: (newPost) => {
 
             if (newPost.status > 399 && newPost.status < 500) {
-                // console.log(newPost.data.errors)
                 throw new Error(newPost.data.errors)
             }
 
