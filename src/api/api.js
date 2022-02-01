@@ -5,7 +5,6 @@ axios.defaults.crossDomain = true;
 
 
 const worker = axios.create({
-    withCredentials: true,
     baseURL: 'https://workers.kevinrmaillet314.workers.dev',
 });
 
@@ -15,5 +14,5 @@ export const addPost = (newPost) => {
 }
 
 export const fetchPosts = () => {
-    return worker.get('/posts').then((res) => res.data.data).catch((error) => error.response);
+    return worker.get('/posts', { withCredentials: true }).then((res) => res.data.data).catch((error) => error.response);
 }
