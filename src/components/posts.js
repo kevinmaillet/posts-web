@@ -10,7 +10,6 @@ const Posts = () => {
     const { isLoading, isError, data, error } = useQuery('posts', fetchPosts);
 
 
-
     if (isLoading) {
         return <span>Loading...</span>
     }
