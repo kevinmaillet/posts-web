@@ -6,7 +6,6 @@ axios.defaults.withCredentials = true
 const worker = axios.create({
     withCredentials: true,
     baseURL: 'https://workers.kevinrmaillet314.workers.dev',
-    headers: { crossDomain: true, 'Content-Type': 'application/json' }
 });
 
 
